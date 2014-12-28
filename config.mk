@@ -4,11 +4,11 @@ VERSION = 0.6
 # Customize below to fit your system
 
 # paths
-PREFIX = /usr/local
+PREFIX = /usr
 MANPREFIX = ${PREFIX}/share/man
 
-X11INC = /usr/X11R6/include
-X11LIB = /usr/X11R6/lib
+X11INC = /usr/include/X11
+X11LIB = /usr/lib/X11
 
 GTKINC = `pkg-config --cflags gtk+-2.0 webkit-1.0`
 GTKLIB = `pkg-config --libs gtk+-2.0 webkit-1.0`
