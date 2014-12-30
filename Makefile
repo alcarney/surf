@@ -30,7 +30,7 @@ surf: ${OBJ}
 
 clean:
 	@echo cleaning
-	@rm -f surf ${OBJ} surf-${VERSION}.tar.gz
+	@rm -f surf ${OBJ} surf-${VERSION}.tar.gz config.h
 
 dist: clean
 	@echo creating dist tarball
