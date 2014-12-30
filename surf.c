@@ -71,6 +71,11 @@ typedef struct {
 
 G_DEFINE_TYPE(CookieJar, cookiejar, SOUP_TYPE_COOKIE_JAR_TEXT)
 
+typedef struct {
+	char *token;
+	char *uri;
+} SearchEngine;
+
 static Display *dpy;
 static Atom atoms[AtomLast];
 static Client *clients = NULL;
@@ -147,6 +152,7 @@ static void loaduri(Client *c, const Arg *arg);
 static void navigate(Client *c, const Arg *arg);
 static Client *newclient(void);
 static void newwindow(Client *c, const Arg *arg, gboolean noembed);
+static gchar *parseuri(const gchar *uri);
 static void pasteuri(GtkClipboard *clipboard, const char *text, gpointer d);
 static gboolean contextmenu(WebKitWebView *view, GtkWidget *menu,
 		WebKitHitTestResult *target, gboolean keyboard, Client *c);
@@ -670,8 +676,7 @@ loaduri(Client *c, const Arg *arg) {
 		u = g_strdup_printf("file://%s", rp);
 		free(rp);
 	} else {
-		u = g_strrstr(uri, "://") ? g_strdup(uri)
-			: g_strdup_printf("http://%s", uri);
+        u = parseuri(uri);
 	}
 
 	setatom(c, AtomUri, uri);
@@ -994,6 +999,20 @@ menuactivate(GtkMenuItem *item, Client *c) {
 		if(uri)
 			gtk_clipboard_set_text(prisel, uri, -1);
 	}
+}
+
+gchar *
+parseuri(const gchar *uri) {
+  guint i;
+
+  for (i = 0; i < LENGTH(searchengines); i++) {
+    if (searchengines[i].token == NULL || searchengines[i].uri == NULL || *(uri + strlen(searchengines[i].token)) != ' ')
+      continue;
+    if (g_str_has_prefix(uri, searchengines[i].token))
+      return g_strdup_printf(searchengines[i].uri, uri + strlen(searchengines[i].token) + 1);
+  }
+
+  return g_strrstr(uri, "://") ? g_strdup(uri) : g_strdup_printf("http://%s", uri);
 }
 
 static void
