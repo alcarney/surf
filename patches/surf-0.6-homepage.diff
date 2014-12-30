@@ -21,3 +21,4 @@ diff -u a/surf.c b/surf.c
 +	#endif
  	if(argc > 0)
  		arg.v = argv[0];
+
