@@ -31,7 +31,11 @@ static Bool loadimages = TRUE;
 static Bool hidebackground  = FALSE;
 static Bool allowgeolocation = TRUE;
 
+<<<<<<< HEAD
 #define HOMEPAGE "https://www.duckduckgo.com/"
+=======
+#define HOMEPAGE "www.google.com"
+>>>>>>> a786f4310d0b850e50449e5a20d057f164a968ad
 #define SETPROP(p, q) { \
 	.v = (char *[]){ "/bin/sh", "-c", \
 		"prop=\"`(xprop -id $2 $0 | cut -d '\"' -f 2 | xargs -0 printf %b && "\
@@ -44,7 +48,7 @@ static Bool allowgeolocation = TRUE;
 /* DOWNLOAD(URI, referer) */
 #define DOWNLOAD(d, r) { \
 	.v = (char *[]){ "/bin/sh", "-c", \
-		"st -e /bin/sh -c \"curl -L -J -O --user-agent '$1'" \
+		"urxvt -e /bin/sh -c \"cd ~/Downloads ; curl -L -J -O --user-agent '$1'" \
 		" --referer '$2' -b $3 -c $3 '$0';" \
 		" sleep 5;\"", \
 		d, useragent, r, cookiefile, NULL \
