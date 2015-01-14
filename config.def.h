@@ -114,6 +114,7 @@ static Key keys[] = {
 
 static SearchEngine searchengines[] = {
   { "g",        "http://www.google.co.uk/search?q=%s"   },
+  { "d",        "http://duckduckgo.com?q%s" },
   { "yt",       "http://www.youtube.com/results?search_query=%s" },
   { "aw",       "http://wiki.archlinux.org/index.php?title=Special:Search&search=%s" },
   { "aur",      "http://aur.archlinux.org/packages/?O=0&K=%s" },
